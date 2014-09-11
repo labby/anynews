@@ -40,7 +40,7 @@ if (! function_exists('displayNewsItems')) {
 		$not_older_than = 0,            // 0:=disabled (default), 0-999 (only show news `published_when` date <=x days; 12 hours:=0.5)
 		$group_id_type = 'group_id',    // type used by group_id to extract news entries (supported: 'group_id', 'page_id', 'section_id', 'post_id')
 		$lang_filter = false            // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
-  	)
+	)
 	{
 		global $wb, $database, $LANG;
 
@@ -50,27 +50,27 @@ if (! function_exists('displayNewsItems')) {
 		 */
 		if (is_array($group_id) ) {
 			// param 1 is pass as an array! We're using this as our config!
-				$defaults = array(
-					'group_id' => 0,
-					'max_news_items' => 10,
-					'max_news_length' => -1,
-					'display_mode' => 1,
-					'lang_id' => 'AUTO',
-					'strip_tags' => true,
-					'allowed_tags' => '<p><a><img>',
-					'custom_placeholder' => false,
-					'sort_by' => 1,
-					'sort_order' => 1,
-					'not_older_than' => 0,
-					'group_id_type' => 'group_id',
-					'lang_filter' => false
-				);
-				// overwrite the defaults within the values  of the $config
-				foreach($group_id as $key=>$val) {
-					$defaults[ $key ] = $val;
-				}
-				
-				foreach($defaults as $key=>$val) ${$key} = $val;
+			$defaults = array(
+				'group_id' => 0,
+				'max_news_items' => 10,
+				'max_news_length' => -1,
+				'display_mode' => 1,
+				'lang_id' => 'AUTO',
+				'strip_tags' => true,
+				'allowed_tags' => '<p><a><img>',
+				'custom_placeholder' => false,
+				'sort_by' => 1,
+				'sort_order' => 1,
+				'not_older_than' => 0,
+				'group_id_type' => 'group_id',
+				'lang_filter' => false
+			);
+			// overwrite the defaults within the values  of the $config
+			foreach($group_id as $key=>$val) {
+				$defaults[ $key ] = $val;
+			}
+			
+			foreach($defaults as $key=>$val) ${$key} = $val;
 		}
 		
 		/**
