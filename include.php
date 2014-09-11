@@ -45,7 +45,15 @@ if (! function_exists('displayNewsItems')) {
 		global $wb, $database, $LANG;
 
 		/**
-		 *	Is first arg = array() ... if so - we're using this one!
+		 *	Is the first arg an array() we're using this one!
+		 *	Keep in mind, that all other args may be overwriten/ignore by
+		 *	the settings inside this array!
+		 *
+		 *	e.g.
+		 *		$config = array( 'max_news_items' => 5 );
+		 *		displayNewsItems( $config, 23, ...
+		 *
+		 *	Only 5 news (NOT 23) items are shown, as the first array overwrites the following params!
 		 *
 		 */
 		$all_args = func_get_args();
