@@ -48,7 +48,9 @@ if (! function_exists('displayNewsItems')) {
 		 *	Is first arg = array() ... if so - we're using this one!
 		 *
 		 */
-		if (is_array($group_id) ) {
+		$all_args = func_get_args();
+		
+		if ( isset($all_args[0]) && is_array($all_args[0]) ) {
 			// param 1 is pass as an array! We're using this as our config!
 			$defaults = array(
 				'group_id' => 0,
@@ -66,7 +68,7 @@ if (! function_exists('displayNewsItems')) {
 				'lang_filter' => false
 			);
 			// overwrite the defaults within the values  of the $config
-			foreach($group_id as $key=>$val) {
+			foreach($all_args[0] as $key=>$val) {
 				$defaults[ $key ] = $val;
 			}
 			
