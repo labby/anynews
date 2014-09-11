@@ -53,7 +53,7 @@ if (! function_exists('displayNewsItems')) {
 		 *		$config = array( 'max_news_items' => 5 );
 		 *		displayNewsItems( $config, 23, ...
 		 *
-		 *	Only 5 news (NOT 23) items are shown, as the first array overwrites the following params!
+		 *	Only 5 news-items (not 23) are shown, as the first array overwrites the following params!
 		 *
 		 */
 		$all_args = func_get_args();
