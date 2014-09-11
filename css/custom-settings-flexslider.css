@@ -1,0 +1,35 @@
+/**
+ * Code snippet: anynews
+ *
+ * This code snippets grabs news from the WB news module database
+ * and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php 
+ * file of the template.
+ *
+ * User defined CSS settings for the thirdparty jQuery plugin flexslider.
+ * Detailed information about the jQuery flexslider plugin and it's settings can
+ * be found on website of the authors: http://flex.madebymufffin.com/
+ * 
+ * LICENSE: GNU General Public License 3.0
+ * 
+ * @platform    CMS Websitebaker 2.8.x
+ * @package     anynews
+ * @author      cwsoft (http://cwsoft.de)
+ * @version     2.1.0
+ * @copyright   cwsoft
+ * @license     http://www.gnu.org/licenses/gpl.html
+*/
+
+/**
+ * Custom CSS to style the flexslider display_output:=5 
+*/
+div.mod_anynews .flexslider {
+	width: 95%;
+	min-height: 100px;
+	background-color: #eee;
+	border: 1px solid #999;
+}
+
+div.mod_anynews ul.slides {
+	padding: 0.5em 3.5em;
+}

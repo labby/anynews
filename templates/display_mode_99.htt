@@ -1,0 +1,53 @@
+<div class="mod_anynews">
+	<!-- BEGIN news_available_block -->
+		<h2>List of Anynews placeholders</h2>
+		<p>The following placeholders can be used in your Anynews template files (/templates/display_mode_X.htt). Remember to put the placeholders into <b>curly brackets {}</b>.<br /> Just use the placeholders you want to show up in your template file.</p>
+
+		<h3>Placeholder: "language file"</h3>
+		<tt>TXT_HEADER: </tt>{TXT_HEADER}<br />
+		<tt>TXT_READMORE: </tt>{TXT_READMORE}<br />
+		<tt>TXT_NO_NEWS: </tt>{TXT_NO_NEWS}<br />
+		<tt>TXT_NEWS: </tt>{TXT_NEWS}<br />
+		<tt>TXT_NUMBER_OF_COMMENTS: </tt>{TXT_NUMBER_OF_COMMENTS}<br />
+		<tt>DATE_FORMAT: </tt>{DATE_FORMAT}<br />
+
+		<!-- BEGIN news_block -->
+			<hr />
+			<h2>News counter: {NEWS_ID}/{NEWS_ITEMS}</h2>
+			<h3 style="text-decoration:underline;color:green;">Main placeholder: "News table"</h3>
+			<tt>TITLE: </tt>{TITLE}<br />
+			<tt>LINK: </tt>{LINK}<br />
+			<tt>CONTENT_SHORT: </tt>{CONTENT_SHORT}<br />
+			<tt>CONTENT_LONG: </tt>{CONTENT_LONG}
+
+			<h3 style="text-decoration:underline;color:green;">Additional placeholder: "News table"</h3>
+			<tt>WB_URL: </tt>{WB_URL}<br />
+			<tt>NEWS_ID: </tt>{NEWS_ID}<br />
+			<tt>POST_ID: </tt>{POST_ID}<br />
+			<tt>SECTION_ID: </tt>{SECTION_ID}<br />
+			<tt>PAGE_ID: </tt>{PAGE_ID}<br />
+			<tt>GROUP_ID: </tt>{GROUP_ID}<br />
+			<tt>COMMENTS: </tt>{COMMENTS}<br />
+
+			<br />
+			<tt>GROUP_TITLE: </tt>{GROUP_TITLE}<br />
+			<tt>POSTED_BY: </tt>{POSTED_BY}<br />
+			<tt>USERNAME: </tt>{USERNAME}<br />
+			<tt>DISPLAY_NAME: </tt>{DISPLAY_NAME}<br />
+			<tt>POSTED_WHEN: </tt>{POSTED_WHEN}<br />
+			<tt>PUBLISHED_WHEN: </tt>{PUBLISHED_WHEN}<br />
+			<tt>PUBLISHED_UNTIL: </tt>{PUBLISHED_UNTIL}<br />
+
+			<h3">Optional User defined placeholder: "News table"</h3>
+			<p>Optional custom placeholders defined via <tt>$custom_placeholder</tt>. For details see <a href="https://github.com/cwsoft/wb-anynews#readme">README</a>.</p>
+			<tt>SHORT_IMG_LINK_1: </tt>{SHORT_IMG_LINK_1}<br />
+			<tt>LONG_IMG_LINK_2: </tt>{LONG_IMG_LINK_1}<br />
+			<tt>SHORT_MY_VAR_1: </tt>{SHORT_MY_VAR_1}<br />
+			<tt>SHORT_MY_VAR_2: </tt>{SHORT_MY_VAR_2}<br />
+		<!-- END news_block -->
+	<!-- END news_available_block -->
+
+	<!-- BEGIN no_news_available_block -->
+		{TXT_NO_NEWS}
+	<!-- END no_news_available_block -->	
+</div>

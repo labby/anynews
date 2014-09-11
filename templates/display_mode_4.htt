@@ -1,0 +1,40 @@
+<script type="text/javascript">
+	// check if jQuery is included via template index.php or equivalent method
+	showJqueryStatus("Anynews (flexslider)");
+
+	// include flexslider files
+	$.include([
+		// load thirdparty jQuery plugin components of flexslider
+		'{WB_URL}/modules/anynews/thirdparty/flexslider/flexslider.css',
+		'{WB_URL}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js',
+		
+		// include YOUR flexslider CSS and settings (adjust these two files to your needs)
+		'{WB_URL}/modules/anynews/css/custom-settings-flexslider.css',
+		'{WB_URL}/modules/anynews/javascript/custom-settings-flexslider.js'
+	]); 
+</script>	
+
+<div class="mod_anynews">
+	<!-- BEGIN news_available_block -->
+		<h2>{TXT_HEADER}</h2>
+
+		<div class="flexslider">
+			<ul class="slides">
+				<!-- BEGIN news_block -->
+					<li>
+						<h2>{TITLE}</h2>
+						{CONTENT_SHORT}
+					
+						<!-- BEGIN readmore_link_block -->
+							<p><a href="{LINK}">{TXT_READMORE}</a></p>
+						<!-- END readmore_link_block -->
+					</li>
+				<!-- END news_block -->
+			</ul>
+		</div>
+	<!-- END news_available_block -->
+	
+	<!-- BEGIN no_news_available_block -->
+		{TXT_NO_NEWS}
+	<!-- END no_news_available_block -->	
+</div>

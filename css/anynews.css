@@ -1,0 +1,33 @@
+/**
+ * Code snippet: anynews
+ *
+ * This code snippets grabs news entries from the WebsiteBaker news
+ * module and displays them on any page you want by invoking the function
+ * displayNewsItems() via a page of type code or the index.php
+ * file of the template.
+ *
+ * This file contains the CSS styles used in the frontend.
+ * 
+ * LICENSE: GNU General Public License 3.0
+ * 
+ * @platform    CMS WebsiteBaker 2.8.x
+ * @package     anynews
+ * @author      cwsoft (http://cwsoft.de)
+ * @version     2.1.0
+ * @copyright   cwsoft
+ * @license     http://www.gnu.org/licenses/gpl-3.0.html
+*/
+
+/**
+ * Custom CSS to style the flexslider display_output:=5 
+*/
+div.mod_anynews h2 {
+}
+
+div.mod_anynews h3 {
+	text-decoration: underline;
+	color: green;
+}
+
+div.mod_anynews p {
+}

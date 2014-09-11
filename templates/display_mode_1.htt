@@ -1,0 +1,21 @@
+<div class="mod_anynews">
+	<!-- BEGIN news_available_block -->
+		<h2>{TXT_HEADER}</h2>
+		
+		<!-- BEGIN news_block -->
+			<p><strong>{TITLE} {POSTED_WHEN}</strong></p>
+			{TXT_NUMBER_OF_COMMENTS}: {COMMENTS}<br />
+			{GROUP_IMAGE} {CONTENT_SHORT}
+			
+			<!-- BEGIN readmore_link_block -->
+				<p><a href="{LINK}">{TXT_READMORE}</a></p>
+			<!-- END readmore_link_block -->
+			<hr />
+		<!-- END news_block -->
+	
+	<!-- END news_available_block -->
+	
+	<!-- BEGIN no_news_available_block -->
+		{TXT_NO_NEWS}
+	<!-- END no_news_available_block -->
+</div>

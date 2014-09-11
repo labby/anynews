@@ -1,0 +1,53 @@
+<script type="text/javascript">
+	// check if jQuery is included via template index.php or equivalent method
+	showJqueryStatus("Anynews (better-coda-slider)");
+	
+	// include better-coda-slider files
+	$.include([
+		// load thirdparty jQuery plugin components of better-coda-slider
+		'{WB_URL}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.scrollTo-min.js',
+		'{WB_URL}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.localscroll-min.js',
+		'{WB_URL}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.serialScroll-min.js',
+		'{WB_URL}/modules/anynews/thirdparty/better-coda-slider/better-coda-slider.css',
+		'{WB_URL}/modules/anynews/thirdparty/better-coda-slider/better-coda-slider.js',
+
+		// include YOUR better-coda-slider CSS and settings (adjust these two files to your needs)
+		'{WB_URL}/modules/anynews/css/custom-settings-better-coda-slider.css',
+		'{WB_URL}/modules/anynews/javascript/custom-settings-better-coda-slider.js'
+	]); 
+</script>	
+
+<div class="mod_anynews">
+	<!-- BEGIN news_available_block -->
+		<h2>{TXT_HEADER}</h2>
+
+		<div id="wrapper">
+			<div id="slider">    
+				<ul class="navigation">
+				<!-- BEGIN custom_block -->
+					<li><a href="#anynews_{NEWS_ID}">{TXT_NEWS} {NEWS_ID}</a></li>
+				<!-- END custom_block -->
+				</ul>
+
+				<div class="scroll">
+					<div class="scrollContainer">
+						<!-- BEGIN news_block -->
+							<div class="panel" id="anynews_{NEWS_ID}">
+								<h2>{TITLE}</h2>
+								{CONTENT_SHORT}
+								
+								<!-- BEGIN readmore_link_block -->
+									<p><a href="{LINK}">{TXT_READMORE}</a></p>
+								<!-- END readmore_link_block -->
+							</div>
+						<!-- END news_block -->
+					</div>
+				</div>
+			</div>
+		</div>
+	<!-- END news_available_block -->
+
+	<!-- BEGIN no_news_available_block -->
+		{TXT_NO_NEWS}
+	<!-- END no_news_available_block -->
+</div>
