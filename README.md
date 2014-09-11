@@ -1,10 +1,10 @@
 # Anynews Code Snippet for CMS LEPTON (1.x)
-The code snippet `Anynews` is designed to fetch news entries from the [LEPTON CMS](http://www.websitebaker2.org) `news` module. Just call the Anynews function ***displayNewsItems();*** where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready for use out of the box.
+The code snippet `Anynews` is designed to fetch news entries from the [LEPTON CMS](http://www.lepton-cms.org) `news` module. Just call the Anynews function ***displayNewsItems();*** where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready for use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long `news` module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
 
 ## Download
-The released stable `Anynews` installation packages for the LEPTON CMS can be found in the [GitHub download area](https://github.com/cwsoft/wb-anynews/downloads). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older LEPTON versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/cwsoft/wb-anynews).
+The released stable `Anynews` installation packages for the LEPTON CMS can be found on the [LEPTON homepage](http://www.lepton-cms.org/english/addons/free-addons.php). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older LEPTON versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/labby/anynews).
 
 ## License
 Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
@@ -14,16 +14,16 @@ The minimum requirements to get Anynews running on your LEPTON installation are 
 
 - LEPTON ***1.x*** or higher
 - default LEPTON `news` module
-- PHP ***5.2.2*** or higher (recommended last stable PHP 5.3.x version)
+- PHP ***5.3.x*** or higher
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [Anynews v2.2.0](https://github.com/downloads/cwsoft/wb-anynews/cwsoft-wb-anynews-v2.2.0.zip) LEPTON installation package
+1. download the [current release](http://www.lepton-cms.org/english/addons/free-addons.php) LEPTON installation package
 2. log into your LEPTON backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the LEPTON installer
 
 ### Enable jQuery support (optional)
-If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your LEPTON frontend template file ***index.php*** in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and search for the following lines. 
+If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your LEPTON frontend template file ***index.php*** in the [Addon File Editor](http://www.lepton-cms.org/english/addons/free-addons.php) and search for the following lines. 
 
 	if (function_exists('register_frontend_modfiles')) {
 		register_frontend_modfiles('css');
@@ -215,7 +215,7 @@ The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews
 		<p>Dummy news text to explain</p>
 	</div>
 	
-To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and add the following CSS definitions.
+To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [Addon File Editor](http://www.lepton-cms.org/english/addons/free-addons.php) and add the following CSS definitions.
 
 	div.mod_anynews h2 {
 		color: green;
@@ -228,10 +228,10 @@ To change the news header of aboves example to green and the news text to blue, 
 ***Note:*** This is common practice to limit the scope of the CSS defintions to the Anynews container. This practice ensures that your CSS definitions do not overwrite styles defined in other modules, templates or the LEPTON core. You should stick to this good practice when creating your own template files.
 	
 ## Known Issues
-You can track the status of known issues or report new issues found in Anynews via GitHubs [issue tracking service](https://github.com/cwsoft/wb-anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
+You can track the status of known issues or report new issues found in Anynews via GitHubs [issue tracking service](https://github.com/labby/anynews/issues). If you run into any issues with Anynews, please visit this page first and check if this issue is already known.
 
 ## Questions
-If you have questions or issues with Anynews, please visit the [English](http://www.websitebaker2.org/forum/index.php/topic,12122.0.html) LEPTON forum support threads and ask for feedback.
+If you have questions or issues with Anynews, please visit the [English](http://forum.lepton-cms.org/) LEPTON forum support threads and ask for feedback.
 
 ***Always provide the following information with your support request:***
 
@@ -243,11 +243,3 @@ If you have questions or issues with Anynews, please visit the [English](http://
  - information about your operating system (e.g. Windows, Mac, Linux) incl. version
  - information of your browser and browser version used
  - information about changes you made to LEPTON (if any)
-
-## Credits
-Credits go to the LEPTON forum member [BlackBird](http://www.websitebaker2.org/forum/index.php?action=profile;u=14154), who maintained the Anynews between July 2009 and March 2010 and the following users who provided translations of the Anynews language file.
-
-- **Dutch (NL.php):** forum members [D72](http://www.websitebaker2.org/forum/index.php?action=profile;u=7298), [Argos](http://www.websitebaker2.org/forum/index.php?action=profile;u=153)
-- **French (FR.php):** by Guillaume Vielliard
-- **Estonia (EE.php):** forum member [eazybaker](http://www.websitebaker2.org/forum/index.php?action=profile;u=11394)
-- **Serbian (RS.php):** forum member [Mirens](http://www.websitebaker2.org/forum/index.php?action=profile;u=13226)
