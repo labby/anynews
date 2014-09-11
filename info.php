@@ -43,10 +43,10 @@ if (defined('WB_PATH')) {
 $module_directory = 'anynews';
 $module_name = 'Anynews';
 $module_function = 'snippet';
-$module_version = '2.2.0';
+$module_version = '2.3.0';
 $module_status = 'STABLE';
 $module_platform = '1.x';
-$module_author = 'cwsoft (http://cwsoft.de)';
+$module_author = 'cwsoft (http://cwsoft.de), Dietrich Roland Pehlke (last)';
 $module_license = '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public Licencse 3.0</a>';
 $module_license_terms = '-';
 $module_description = 'Call displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be.';

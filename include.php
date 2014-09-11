@@ -45,6 +45,35 @@ if (! function_exists('displayNewsItems')) {
 		global $wb, $database, $LANG;
 
 		/**
+		 *	Is first arg = array() ... if so - we're using this one!
+		 *
+		 */
+		if (is_array($group_id) ) {
+			// param 1 is pass as an array! We're using this as our config!
+				$defaults = array(
+					'group_id' => 0,
+					'max_news_items' => 10,
+					'max_news_length' => -1,
+					'display_mode' => 1,
+					'lang_id' => 'AUTO',
+					'strip_tags' => true,
+					'allowed_tags' => '<p><a><img>',
+					'custom_placeholder' => false,
+					'sort_by' => 1,
+					'sort_order' => 1,
+					'not_older_than' => 0,
+					'group_id_type' => 'group_id',
+					'lang_filter' => false
+				);
+				// overwrite the defaults within the values  of the $config
+				foreach($group_id as $key=>$val) {
+					$defaults[ $key ] = $val;
+				}
+				
+				foreach($defaults as $key=>$val) ${$key} = $val;
+		}
+		
+		/**
 		 * Include required Anynews files
 		 */
 		require_once ('code/anynews_functions.php');
