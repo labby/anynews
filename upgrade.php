@@ -34,10 +34,16 @@ $to_delete = array(
 	'/modules/anynews/frontend.js',
 	'/modules/anynews/css/anynews.css',
 	'/modules/anynews/css/custom-settings-better-coda-slider.css',
-	'/modules/anynews/css/custom-settings-flexslider.css'
+	'/modules/anynews/css/custom-settings-flexslider.css',
+	'/modules/anynews/templates/display_mode_1.htt',
+	'/modules/anynews/templates/display_mode_2.htt',
+	'/modules/anynews/templates/display_mode_3.htt',
+	'/modules/anynews/templates/display_mode_4.htt',
+	'/modules/anynews/templates/display_mode_99.htt'
+	
 );
 
-LEPTON_handle::delete_obsolete_files($to_delete)
+LEPTON_handle::delete_obsolete_files($to_delete);
 
 if(file_exists(LEPTON_PATH.'/modules/anynews/frontend.css')) {	
 	rename(LEPTON_PATH.'/modules/anynews/frontend.css',LEPTON_PATH.'/modules/anynews/css/frontend_sik.css');

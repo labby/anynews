@@ -50,6 +50,8 @@ if (! function_exists('displayNewsItems')) {
 	{
 		global $oLEPTON, $database;
 		$oAN = anynews::getInstance();
+		$oTWIG = lib_twig_box::getInstance();
+		$oTWIG->registerModule('anynews');
 
 		/**
 		 *	Is the first arg an array() we're using this one!
@@ -89,13 +91,12 @@ if (! function_exists('displayNewsItems')) {
 			
 			foreach($defaults as $key=>$val) ${$key} = $val;
 		}
-		
+
 		/**
 		 * Include required Anynews files
 		 */
 		require_once ('code/anynews_functions.php');
 		require_once ('thirdparty/truncate.php');
-		require_once (LEPTON_PATH . '/include/phplib/template.inc');
 
 		/**
 		 * Sanitize user specified function parameters
@@ -112,46 +113,10 @@ if (! function_exists('displayNewsItems')) {
 		sanitizeUserInputs($group_id_type, 'l{group_id;group_id;page_id;section_id;post_id}');
 		sanitizeUserInputs($lang_filter, 'b');
 
-
-		/**
-		 * Create template object and configure it
-		 */
-		$tpl = new Template(dirname(__FILE__) . '/templates');
-
-		// configure handling of unknown {variables} (remove:=default, keep, comment)
-		$tpl->set_unknowns('remove');
-
-		// configure debug mode (0:= default, 1:=variable assignments, 2:=calls to get variable, 4:=show internals)
-		$tpl->debug = 0;
-
 		// set template file depending on $display_mode
-		if (file_exists(dirname(__FILE__) . '/templates/display_mode_' . $display_mode . '.htt')) {
-			// set user defined template
-			$tpl->set_file('page', 'display_mode_' . $display_mode . '.htt');
-		} else {
-			// set default template
-			$tpl->set_file('page', 'display_mode_1.htt');
-		}
+		$used_template = 'display_mode_'.$display_mode.'.lte';
 
-		// define "read more block" used to show/hide readmore link depending on long news content
-		$tpl->set_block('page', 'readmore_link_block', 'readmore_link_block_handle');
 
-		// define optional "custom block" which can be used in template files if needed
-		$tpl->set_block('page', 'custom_block', 'custom_block_handle');
-
-		// define "news block" used for text outputs of individual news items (news text, links etc.)  
-		$tpl->set_block('page', 'news_block', 'news_block_handle');
-
-		// define "news wrapper block" shown if at least one news entry exists
-		$tpl->set_block('page', 'news_available_block', 'news_available_block_handle');
-
-		// define "no news wrapper block" shown in no news entry exists
-		$tpl->set_block('page', 'no_news_available_block', 'no_news_available_block_handle');
-
-		// replace placeholders with values from language file
-		foreach ($oAN->language as $key => $value) {
-			$tpl->set_var($key, $value);
-		}
 
 		/**
 		 * Work out SQL query for group_id, limiting news to display depedning by defined $news_filter
@@ -231,17 +196,23 @@ if (! function_exists('displayNewsItems')) {
 		/**
 		 * Process database query and output the template files
 		 */
-		$results = $database->query($sql);
-		if ($results && $results->numRows() > 0) {
+		$results = array();
+		$database->execute_query($sql,
+		true,
+		$results,
+		true
+		);
+//echo(LEPTON_tools::display($results,'pre','ui message'));
+		if (count($results) > 0) {
 			// fetch news group titles from news database table
 			$news_group_titles = getNewsGroupTitles();
 
 			// fetch user names from users database table
 			$user_list = getUserNames();
-
+//echo($oTWIG->render('@anynews/'.$used_template.'',$results));
 			// loop through all news articles found
 			$news_counter = 1;
-			while ($row = $results->fetchRow()) {
+			foreach($results as $row) { 
 				// build absolute links from [wblink] tags found in news short or long text database field
 				$oLEPTON->preprocess($row['content_short']);
 				$oLEPTON->preprocess($row['content_long']);
@@ -275,8 +246,9 @@ if (! function_exists('displayNewsItems')) {
 				}
 
 				// replace news article dependend template placeholders
-				$tpl->set_var(array(
-					'LEPTON_PURL' => LEPTON_URL, 
+				$data = array(
+					'oAN' 	=> $oAN,
+					'$results' 	=> $results,
 					'GROUP_IMAGE' => $image, 
 					'NEWS_ID' => $news_counter, 
 					'POST_ID' => (int)$row['post_id'], 
@@ -295,9 +267,13 @@ if (! function_exists('displayNewsItems')) {
 					'POSTED_WHEN' => date($oAN->language['DATE_FORMAT'],$row['posted_when']), 
 					'PUBLISHED_WHEN' => date($oAN->language['DATE_FORMAT'], $row['published_when']), 
 					'PUBLISHED_UNTIL' => date($oAN->language['DATE_FORMAT'], $row['published_until'])
-					)
 				);
 
+				echo $oTWIG->render( 
+					"@anynews/".$used_template."",	//	template-filename
+					$data							//	template-data
+				);				
+				
 				// remove "read more block" from template if no long content is available
 				$tpl->parse('readmore_link_block_handle', 'readmore_link_block', false);
 				if (! isset($row['content_long']) || ! strlen($row['content_long']) > 0) {
