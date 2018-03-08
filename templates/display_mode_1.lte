@@ -14,24 +14,24 @@
 {% autoescape false %}
 <div class="mod_anynews">
 	<!-- BEGIN news_available_block -->
-		<h2>{{ TXT_HEADER }}</h2>
+		<h2>{{ oAN.language.TXT_HEADER }}</h2>
 		
-		<!-- BEGIN news_block -->
-			<p><strong>{{ TITLE }} {{ POSTED_WHEN }}</strong></p>
-			{{ oAN.language.TXT_NUMBER_OF_COMMENTS }}: {{ COMMENTS }}<br />
-			{{ GROUP_IMAGE }} {{ CONTENT_SHORT }}
+		{% for item in results %}
+			<p><strong>{{ item.TITLE }} {{ item.POSTED_WHEN }}</strong></p>
+			{{ oAN.language.TXT_NUMBER_OF_COMMENTS }}: {{ item.COMMENTS }}<br />
+			{{ item.GROUP_IMAGE }} {{ item.CONTENT_SHORT }}
 			
 			<!-- BEGIN readmore_link_block -->
-				<p><a href="{{ LINK }}">{{ oAN.language.TXT_READMORE }}</a></p>
+				<p><a href="{{ item.LINK }}">{{ oAN.language.TXT_READMORE }}</a></p>
 			<!-- END readmore_link_block -->
 			<hr />
-		<!-- END news_block -->
+		{% endfor %}
 	
 	<!-- END news_available_block -->
 	
-	<!-- BEGIN no_news_available_block -->
+	{% if results|length == 0 %}	
 		{{ oAN.language.TXT_NO_NEWS }}
-	<!-- END no_news_available_block -->
+	{% endif %}
 </div>	
 {% endautoescape %}
 <!-- end twig content -->

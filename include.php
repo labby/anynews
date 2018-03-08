@@ -248,7 +248,7 @@ if (! function_exists('displayNewsItems')) {
 				// replace news article dependend template placeholders
 				$data = array(
 					'oAN' 	=> $oAN,
-					'$results' 	=> $results,
+					'results' 	=> $results,
 					'GROUP_IMAGE' => $image, 
 					'NEWS_ID' => $news_counter, 
 					'POST_ID' => (int)$row['post_id'], 

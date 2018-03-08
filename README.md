@@ -4,7 +4,7 @@ The code snippet `Anynews` is designed to fetch news entries from the [LEPTON CM
 Power users define their own placeholders containing information extracted from the short and/or long `news` module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
 
 ## Download
-The released stable `Anynews` installation packages for the LEPTON CMS can be found on the [LEPTON homepage](http://www.lepton-cms.org/english/addons/free-addons.php). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older LEPTON versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/labby/anynews).
+The released stable `Anynews` installation packages for the LEPTON CMS can be found on the [LEPTON homepage](http://lepton-cms.com). It is recommended to install/update to the latest available version listed. Older versions are provided for compatibility reasons with older LEPTON versions and may contain bugs or security issues. The development history of Anynews can be tracked via [GitHub](https://github.com/labby/anynews).
 
 ## License
 Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www.gnu.org/licenses/gpl-3.0.html).
@@ -43,7 +43,7 @@ Create a new page or section of type `Code` in the LEPTON backend and enter the 
 The Anynews output is only visible at the pages/sections of your frontend, which contain the code above.
 
 ### Use Anynews from your template
-To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme). Then add the code below to the position in your template where you want the news output to appear.
+To display news items at a fixed position on every page of your frontend, open the ***index.php*** file of your default frontend template and add the code below to the position in your template where you want the news output to appear.
 
 	<?php
 		if (function_exists('displayNewsItems')) {
