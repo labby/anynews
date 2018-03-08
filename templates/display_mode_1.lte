@@ -17,13 +17,15 @@
 		<h2>{{ oAN.language.TXT_HEADER }}</h2>
 		
 		{% for item in results %}
-			<p><strong>{{ item.TITLE }} {{ item.POSTED_WHEN }}</strong></p>
-			{{ oAN.language.TXT_NUMBER_OF_COMMENTS }}: {{ item.COMMENTS }}<br />
-			{{ item.GROUP_IMAGE }} {{ item.CONTENT_SHORT }}
+			<p><strong>{{ item.title }} {{ item.posted_when }}</strong></p>
+			{% if  item.commenting != 'none' %}{{ oAN.language.TXT_NUMBER_OF_COMMENTS }}: {{ item.comments }}<br />{% endif %}
+			{{ item.group_image }} {{ item.content_short }}
 			
-			<!-- BEGIN readmore_link_block -->
-				<p><a href="{{ item.LINK }}">{{ oAN.language.TXT_READMORE }}</a></p>
-			<!-- END readmore_link_block -->
+			{% if item.content_long|length == 0 %}
+				<p></p>
+			{% else %}
+				<p><a href="{{ item.link }}">{{ oAN.language.TXT_READMORE }}</a></p>
+			{% endif %}
 			<hr />
 		{% endfor %}
 	

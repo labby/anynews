@@ -14,18 +14,18 @@
 {% autoescape false %}
 <div class="mod_anynews">
 	<!-- BEGIN news_available_block -->
-		<h2>{{ TXT_HEADER }}</h2>
+		<h2>{{ oAN.language.TXT_HEADER }}</h2>
 		
 		<ul>
-			<!-- BEGIN news_block -->
-				<li><a href="{{ LINK }}">{{ TITLE }} {{ POSTED_WHEN }}</a></li>
-			<!-- END news_block -->
+			{% for item in results %}
+				<li><a href="{{ item.link }}">{{ item.title }} {{ item.posted_when }}</a></li>
+			{% endfor %}
 		</ul>
 	<!-- END news_available_block -->
 
-	<!-- BEGIN no_news_available_block -->
-		{{ TXT_NO_NEWS }}
-	<!-- END no_news_available_block -->
+	{% if results|length == 0 %}	
+		{{ oAN.language.TXT_NO_NEWS }}
+	{% endif %}
 </div>
 {% endautoescape %}
 <!-- end twig content -->

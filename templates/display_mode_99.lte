@@ -18,52 +18,51 @@
 		<p>The following placeholders can be used in your Anynews template files (/templates/display_mode_X.htt). Remember to put the placeholders into <b>curly brackets {{  }}</b>.<br /> Just use the placeholders you want to show up in your template file.</p>
 
 		<h3>Placeholder: "language file"</h3>
-		<tt>TXT_HEADER: </tt>{{ TXT_HEADER }}<br />
-		<tt>TXT_READMORE: </tt>{{ TXT_READMORE }}<br />
-		<tt>TXT_NO_NEWS: </tt>{{ TXT_NO_NEWS }}<br />
-		<tt>TXT_NEWS: </tt>{{ TXT_NEWS }}<br />
-		<tt>TXT_NUMBER_OF_COMMENTS: </tt>{{ TXT_NUMBER_OF_COMMENTS }}<br />
-		<tt>DATE_FORMAT: </tt>{{ DATE_FORMAT }}<br />
+		<tt>TXT_HEADER: </tt>{{ oAN.language.TXT_HEADER }}<br />
+		<tt>TXT_READMORE: </tt>{{ oAN.language.TXT_READMORE }}<br />
+		<tt>TXT_NO_NEWS: </tt>{{ oAN.language.TXT_NO_NEWS }}<br />
+		<tt>TXT_NEWS: </tt>{{ oAN.language.TXT_NEWS }}<br />
+		<tt>TXT_NUMBER_OF_COMMENTS: </tt>{{ oAN.language.TXT_NUMBER_OF_COMMENTS }}<br />
+		<tt>DATE_FORMAT: </tt>{{ oAN.language.DATE_FORMAT }}<br />
 
-		<!-- BEGIN news_block -->
+		{% for item in results %}
 			<hr />
-			<h2>News counter: {{ NEWS_ID }}/{{ NEWS_ITEMS }}</h2>
+			<h2>News counter: {{ item.news_counter }}/{{ item.news_items }}</h2>
 			<h3 style="text-decoration:underline;color:green;">Main placeholder: "News table"</h3>
-			<tt>TITLE: </tt>{{ TITLE }}<br />
-			<tt>LINK: </tt>{{ LINK }}<br />
-			<tt>CONTENT_SHORT: </tt>{{ CONTENT_SHORT }}<br />
-			<tt>CONTENT_LONG: </tt>{{ CONTENT_LONG }}
+			<tt>TITLE: </tt>{{ item.title }}<br />
+			<tt>LINK: </tt>{{ item.link }}<br />
+			<tt>CONTENT_SHORT: </tt>{{ item.content_short }}<br />
+			<tt>CONTENT_LONG: </tt>{{ item.content_long }}
 
 			<h3 style="text-decoration:underline;color:green;">Additional placeholder: "News table"</h3>
-			<tt>LEPTON_PURL: </tt>{{ LEPTON_PURL }}<br />
-			<tt>NEWS_ID: </tt>{{ NEWS_ID }}<br />
-			<tt>POST_ID: </tt>{{ POST_ID }}<br />
-			<tt>SECTION_ID: </tt>{{ SECTION_ID }}<br />
-			<tt>PAGE_ID: </tt>{{ PAGE_ID }}<br />
-			<tt>GROUP_ID: </tt>{{ GROUP_ID }}<br />
-			<tt>COMMENTS: </tt>{{ COMMENTS }}<br />
+			<tt>LEPTON_PURL: </tt>{{ LEPTON_URL }}<br />
+			<tt>news_counter: </tt>{{ item.news_counter }}<br />
+			<tt>POST_ID: </tt>{{ item.post_id }}<br />
+			<tt>SECTION_ID: </tt>{{ item.section_id }}<br />
+			<tt>PAGE_ID: </tt>{{ item.page_id }}<br />
+			<tt>GROUP_ID: </tt>{{ item.group_id }}<br />
+			<tt>COMMENTS: </tt>{{ item.comments }}<br />
 
 			<br />
-			<tt>GROUP_TITLE: </tt>{{ GROUP_TITLE }}<br />
-			<tt>POSTED_BY: </tt>{{ POSTED_BY }}<br />
-			<tt>USERNAME: </tt>{{ USERNAME }}<br />
-			<tt>DISPLAY_NAME: </tt>{{ DISPLAY_NAME }}<br />
-			<tt>POSTED_WHEN: </tt>{{ POSTED_WHEN }}<br />
-			<tt>PUBLISHED_WHEN: </tt>{{ PUBLISHED_WHEN }}<br />
-			<tt>PUBLISHED_UNTIL: </tt>{{ PUBLISHED_UNTIL }}<br />
+			<tt>GROUP_TITLE: </tt>{{ item.group_title }}<br />
+			<tt>POSTED_BY: </tt>{{ item.posted_by }}<br />
+			<tt>USERNAME: </tt>{{ item.username }}<br />
+			<tt>DISPLAY_NAME: </tt>{{ item.display.name }}<br />
+			<tt>POSTED_WHEN: </tt>{{ item.posted_when }}<br />
+			<tt>PUBLISHED_WHEN: </tt>{{ item.published_when }}<br />
+			<tt>PUBLISHED_UNTIL: </tt>{{ item.published_until }}<br />
 
 			<h3">Optional User defined placeholder: "News table"</h3>
-			<p>Optional custom placeholders defined via <tt>$custom_placeholder</tt>. For details see <a href="https://github.com/cwsoft/wb-anynews#readme">README</a>.</p>
-			<tt>SHORT_IMG_LINK_1: </tt>{{ SHORT_IMG_LINK_1 }}<br />
-			<tt>LONG_IMG_LINK_2: </tt>{{ LONG_IMG_LINK_1 }}<br />
-			<tt>SHORT_MY_VAR_1: </tt>{{ SHORT_MY_VAR_1 }}<br />
-			<tt>SHORT_MY_VAR_2: </tt>{{ SHORT_MY_VAR_2 }}<br />
-		<!-- END news_block -->
-	<!-- END news_available_block -->
+			<p>Optional custom placeholders defined via <tt>$custom_placeholder</tt>.</p>
+			<tt>SHORT_IMG_LINK_1: </tt>{{ item.short_img_link_1 }}<br />
+			<tt>LONG_IMG_LINK_2: </tt>{{ item.long_img_link_1 }}<br />
+			<tt>SHORT_MY_VAR_1: </tt>{{ item.short_my_var_1 }}<br />
+			<tt>SHORT_MY_VAR_2: </tt>{{ item.short_my_var_2 }}<br />
+		{% endfor %}
 
-	<!-- BEGIN no_news_available_block -->
-		{{ TXT_NO_NEWS }}
-	<!-- END no_news_available_block -->	
+	{% if results|length == 0 %}	
+		{{ oAN.language.TXT_NO_NEWS }}
+	{% endif %}	
 </div>	
 {% endautoescape %}
 <!-- end twig content -->

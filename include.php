@@ -209,10 +209,10 @@ if (! function_exists('displayNewsItems')) {
 
 			// fetch user names from users database table
 			$user_list = getUserNames();
-//echo($oTWIG->render('@anynews/'.$used_template.'',$results));
+
 			// loop through all news articles found
 			$news_counter = 1;
-			foreach($results as $row) { 
+			foreach($results as &$row) { 
 				// build absolute links from [wblink] tags found in news short or long text database field
 				$oLEPTON->preprocess($row['content_short']);
 				$oLEPTON->preprocess($row['content_long']);
@@ -246,74 +246,28 @@ if (! function_exists('displayNewsItems')) {
 				}
 
 				// replace news article dependend template placeholders
-				$data = array(
-					'oAN' 	=> $oAN,
-					'results' 	=> $results,
-					'GROUP_IMAGE' => $image, 
-					'NEWS_ID' => $news_counter, 
-					'POST_ID' => (int)$row['post_id'], 
-					'SECTION_ID' => (int)$row['section_id'], 
-					'PAGE_ID' => (int)$row['page_id'], 
-					'GROUP_ID' => (int)$row['group_id'], 
-					'GROUP_TITLE' => array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '',
-					'POSTED_BY' => (int)$row['posted_by'], 
-					'USERNAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '', 
-					'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 
-					'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 
-					'COMMENTS' => isset($row['comments']) ? $row['comments'] : 0, 
-					'LINK' => LEPTON_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
-					'CONTENT_SHORT' => $image . $row['content_short'], 
-					'CONTENT_LONG' => $row['content_long'], 
-					'POSTED_WHEN' => date($oAN->language['DATE_FORMAT'],$row['posted_when']), 
-					'PUBLISHED_WHEN' => date($oAN->language['DATE_FORMAT'], $row['published_when']), 
-					'PUBLISHED_UNTIL' => date($oAN->language['DATE_FORMAT'], $row['published_until'])
-				);
-
-				echo $oTWIG->render( 
-					"@anynews/".$used_template."",	//	template-filename
-					$data							//	template-data
-				);				
+				$row['group_image'] = $image;
+				$row['news_counter'] = $news_counter;
+				$row['group_title'] = array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '';
+				$row['username'] = array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '';
+				$row['display_name'] = array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '';
+				$row['link'] = LEPTON_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION;
+				$row['posted_when'] =  date($oAN->language['DATE_FORMAT'],$row['posted_when']);
+				$row['published_when'] = date($oAN->language['DATE_FORMAT'], $row['published_when']);
+				$row['published_until'] = date($oAN->language['DATE_FORMAT'], $row['published_until']);	
+				$row['news_items'] = $news_counter - 1;			
 				
-				// remove "read more block" from template if no long content is available
-				$tpl->parse('readmore_link_block_handle', 'readmore_link_block', false);
-				if (! isset($row['content_long']) || ! strlen($row['content_long']) > 0) {
-					$tpl->set_var('readmore_link_block_handle', '');
-				}
-
-				// add optional custom template block in append mode (add per loop)
-				$tpl->parse('custom_block_handle', 'custom_block', true);
-
-				// add template values in news block in append mode (add per loop)
-				$tpl->parse('news_block_handle', 'news_block', true);
-
-				// remove custom variables to start blank for the next news entry
-				foreach ($custom_vars as $key => $value) {
-					$tpl->set_var($key, '');
-				}
-
 				$news_counter++;
 			}
-			// update the total number of news items
-			$tpl->set_var('NEWS_ITEMS', $news_counter - 1);
-			
-			// remove the "no news available block" from output
-			$tpl->set_var('no_news_available_block_handle', '');
-
-			// parse the news content block
-			$tpl->parse('news_available_block_handle', 'news_available_block', false);
-			
-		} else {
-			// update the total number of news items
-			$tpl->set_var('NEWS_ITEMS', 0);
-
-			// remove the "news available block" from output
-			$tpl->set_var('news_available_block_handle', '');
-
-			// remove blocks not used
-			$tpl->parse('no_news_available_block_handle', 'no_news_available_block', true);
-		}
-	
-		// ouput the final template
-		$tpl->pparse('output', 'page');
+			$data = array(
+			'results' => $results,
+			'oAN'	=> $oAN
+			);
+		
+			echo $oTWIG->render( 
+				"@anynews/".$used_template."",	//	template-filename
+				$data					//	template-data
+			);				
+		}		
 	}
 }
