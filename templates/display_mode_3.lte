@@ -19,15 +19,15 @@
 	// include better-coda-slider files
 	$.include([
 		// load thirdparty jQuery plugin components of better-coda-slider
-		'{LEPTON_PURL}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.scrollTo-min.js',
-		'{LEPTON_PURL}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.localscroll-min.js',
-		'{LEPTON_PURL}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.serialScroll-min.js',
-		'{LEPTON_PURL}/modules/anynews/thirdparty/better-coda-slider/better-coda-slider.css',
-		'{LEPTON_PURL}/modules/anynews/thirdparty/better-coda-slider/better-coda-slider.js',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.scrollTo-min.js',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.localscroll-min.js',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/better-coda-slider/jquery-plugins/jquery.serialScroll-min.js',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/better-coda-slider/better-coda-slider.css',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/better-coda-slider/better-coda-slider.js',
 
 		// include YOUR better-coda-slider CSS and settings (adjust these two files to your needs)
-		'{LEPTON_PURL}/modules/anynews/css/custom-settings-better-coda-slider.css',
-		'{LEPTON_PURL}/modules/anynews/javascript/custom-settings-better-coda-slider.js'
+		'{{ LEPTON_URL }}/modules/anynews/css/custom-settings-better-coda-slider.css',
+		'{{ LEPTON_URL }}/modules/anynews/javascript/custom-settings-better-coda-slider.js'
 	]); 
 </script>
 

@@ -19,12 +19,12 @@
 	// include flexslider files
 	$.include([
 		// load thirdparty jQuery plugin components of flexslider
-		'{LEPTON_PURL}/modules/anynews/thirdparty/flexslider/flexslider.css',
-		'{LEPTON_PURL}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/flexslider.css',
+		'{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js',
 		
 		// include YOUR flexslider CSS and settings (adjust these two files to your needs)
-		'{LEPTON_PURL}/modules/anynews/css/custom-settings-flexslider.css',
-		'{LEPTON_PURL}/modules/anynews/javascript/custom-settings-flexslider.js'
+		'{{ LEPTON_URL }}/modules/anynews/css/custom-settings-flexslider.css',
+		'{{ LEPTON_URL }}/modules/anynews/javascript/custom-settings-flexslider.js'
 	]); 
 </script>
 

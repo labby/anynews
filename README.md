@@ -132,7 +132,7 @@ You can output a list with all *group_ids* and the *group titles* created by the
 Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 
 	
 ### Anynews Templates
-The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template to be used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file with the [Addon File Editor](https://github.com/cwsoft/wb-addon-file-editor#readme) and name as follows: **templates/display_mode_5.htt**
+The HTML skeleton of the Anynews output is defined by template files **templates/display_mode_X.htt**. The template to be used is defined by the Anynews function parameter **$display_mode**, which defaults to 1 if no valid input is defined. Create a blank template file and name as follows: **templates/display_mode_5.htt**
 
 #### Step 1:
 Add the HTML markup below to your custom template file. The entire HTML output should be wrapped in a div with class "mod_anynews" to prevent CSS clashes with other modules, templates or the LEPTON core. 
@@ -201,7 +201,7 @@ The Anynews default templates (*/templates/display_mode_X.htt*) wrap the Anynews
 		<p>Dummy news text to explain</p>
 	</div>
 	
-To change the news header of aboves example to green and the news text to blue, open the ***css/anynews.css*** file in the [Addon File Editor](http://www.lepton-cms.org/english/addons/free-addons.php) and add the following CSS definitions.
+To change the news header of aboves example to green and the news text to blue, open the ***css/frontend.css*** file and add the following CSS definitions.
 
 	div.mod_anynews h2 {
 		color: green;
@@ -224,8 +224,8 @@ If you have questions or issues with Anynews, please visit the [English](http://
  - detailed error description (what happens, what have you already tried ...)
  - the Anynews version (go to LEPTON section Add-ons / Info / Anynews)
  - your PHP version (use phpinfo(); or ask your provider if in doubt)
- - LEPTON version, Service Pack number and build number of your version
- - name of the LEPTON frontent template used (e.g. round, allcss ...)
+ - LEPTON version
+ - name of the LEPTON frontent template 
  - information about your operating system (e.g. Windows, Mac, Linux) incl. version
  - information of your browser and browser version used
  - information about changes you made to LEPTON (if any)
