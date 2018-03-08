@@ -13,19 +13,25 @@
 <!-- start twig content -->
 {% autoescape false %}
 <script type="text/javascript">
-	// check if jQuery is included via template index.php or equivalent method
-	showJqueryStatus("Anynews (flexslider)");
 
-	// include flexslider files
-	$.include([
-		// load thirdparty jQuery plugin components of flexslider
-		'{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/flexslider.css',
-		'{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js',
-		
-		// include YOUR flexslider CSS and settings (adjust these two files to your needs)
-		'{{ LEPTON_URL }}/modules/anynews/css/custom-settings-flexslider.css',
-		'{{ LEPTON_URL }}/modules/anynews/javascript/custom-settings-flexslider.js'
-	]); 
+	var $head = $("html").contents().find("head");
+    $head.append($("<link/>", 
+        {
+            rel: "stylesheet",
+            href: "{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/flexslider.css",
+            type: "text/css"
+        }));
+	
+	$head.append($("<link/>", 
+        {
+            rel: "stylesheet",
+            href: "{{ LEPTON_URL }}/modules/anynews/css/custom-settings-flexslider.css",
+            type: "text/css"
+        }));
+        
+	$.getScript( '{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js');
+	$.getScript( '{{ LEPTON_URL }}/modules/anynews/javascript/custom-settings-flexslider.js');
+
 </script>
 
 <div class="mod_anynews">
