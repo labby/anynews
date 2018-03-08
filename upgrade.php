@@ -1,27 +1,18 @@
 <?php
+
 /**
- * Code snippet: anynews
+ * @module          anynews
+ * @author          cwsoft, LEPTON project
+ * @copyright       cwsoft, LEPTON project
+ * @link            http://www.cms-lab.com
+ * @license         http://www.gnu.org/licenses/gpl-3.0.html
+ * @license_terms   please see license
  *
- * This code snippets grabs news entries from the WebsiteBaker news
- * module and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php
- * file of the template.
- *
- * This file checks the installation requirements atinstallation
- * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @platform    CMS LEPTON 1.x
- * @package     anynews
- * @author      cwsoft (http://cwsoft.de)
- * @version     see info.php of this addon
- * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl-3.0.html
-*/
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -37,5 +28,20 @@ if (defined('WB_PATH')) {
 	}
 }
 // end include class.secure.php
+
+// LEPTON 4*
+$to_delete = array(
+	'/modules/anynews/frontend.js',
+	'/modules/anynews/css/anynews.css',
+	'/modules/anynews/css/custom-settings-better-coda-slider.css',
+	'/modules/anynews/css/custom-settings-flexslider.css'
+);
+
+LEPTON_handle::delete_obsolete_files($to_delete)
+
+if(file_exists(LEPTON_PATH.'/modules/anynews/frontend.css')) {	
+	rename(LEPTON_PATH.'/modules/anynews/frontend.css',LEPTON_PATH.'/modules/anynews/css/frontend_sik.css');
+}
+
 
 ?>

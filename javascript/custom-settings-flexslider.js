@@ -1,24 +1,12 @@
 /**
- * Code snippet: anynews
+ * @module          anynews
+ * @author          cwsoft, LEPTON project
+ * @copyright       cwsoft, LEPTON project
+ * @link            http://www.cms-lab.com
+ * @license         http://www.gnu.org/licenses/gpl-3.0.html
+ * @license_terms   please see license
  *
- * This code snippets grabs news from the WB news module database
- * and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php 
- * file of the template.
- *
- * User defined JavaScript settings for the thirdparty jQuery plugin flexslider.
- * Detailed information about the jQuery flexslider plugin and it's settings can
- * be found on website of the authors: http://flex.madebymufffin.com/
- * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @platform    CMS Websitebaker 2.8.x
- * @package     anynews
- * @author      cwsoft (http://cwsoft.de)
- * @version     2.1.0
- * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl.html
-*/
+ */
 
 $(document).ready(function() {
    // put all your jQuery goodness in here.

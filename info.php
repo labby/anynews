@@ -1,28 +1,18 @@
 <?php
 
 /**
- * Code snippet: anynews
+ * @module          anynews
+ * @author          cwsoft, LEPTON project
+ * @copyright       cwsoft, LEPTON project
+ * @link            http://www.cms-lab.com
+ * @license         http://www.gnu.org/licenses/gpl-3.0.html
+ * @license_terms   please see license
  *
- * This code snippets grabs news entries from the WebsiteBaker news
- * module and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php
- * file of the template.
- *
- * This file checks the installation requirements atinstallation
- * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @platform    CMS LEPTON 1.x
- * @package     anynews
- * @author      cwsoft (http://cwsoft.de)
- * @version     see info.php of this addon
- * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl-3.0.html
-*/
+ */
 
 // include class.secure.php to protect this file and the whole CMS!
-if (defined('WB_PATH')) {	
-	include(WB_PATH.'/framework/class.secure.php'); 
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
 } else {
 	$oneback = "../";
 	$root = $oneback;
@@ -39,14 +29,14 @@ if (defined('WB_PATH')) {
 }
 // end include class.secure.php
 
-// OBLIGATORY WEBSITE BAKER VARIABLES
+// OBLIGATORY VARIABLES
 $module_directory = 'anynews';
 $module_name = 'Anynews';
 $module_function = 'snippet';
-$module_version = '2.3.0';
-$module_status = 'STABLE';
-$module_platform = '1.x';
-$module_author = 'cwsoft (http://cwsoft.de), Dietrich Roland Pehlke (last)';
+$module_version = '3.0.0';
+$module_status = 'stable';
+$module_platform = '4.x';
+$module_author = 'cwsoft (http://cwsoft.de), LEPTON project (last)';
 $module_license = '<a href="http://www.gnu.org/licenses/gpl.html">GNU General Public Licencse 3.0</a>';
 $module_license_terms = '-';
 $module_description = 'Call displayNewsItems(); from the index.php of your template or a code section to display news entries where you want them to be.';

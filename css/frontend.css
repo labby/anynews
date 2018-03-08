@@ -7,3 +7,17 @@
  * @license_terms   please see license
  *
  */
+
+/**
+ * Custom CSS to style the flexslider display_output:=5 
+*/
+div.mod_anynews h2 {
+}
+
+div.mod_anynews h3 {
+	text-decoration: underline;
+	color: green;
+}
+
+div.mod_anynews p {
+}

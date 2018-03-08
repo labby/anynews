@@ -1,28 +1,34 @@
 <?php
+
 /**
- * Code snippet: anynews
+ * @module          anynews
+ * @author          cwsoft, LEPTON project
+ * @copyright       cwsoft, LEPTON project
+ * @link            http://www.cms-lab.com
+ * @license         http://www.gnu.org/licenses/gpl-3.0.html
+ * @license_terms   please see license
  *
- * This code snippets grabs news entries from the WebsiteBaker news
- * module and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php
- * file of the template.
- *
- * This file implements the Anynews function displayNewsItems.
- * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @platform    CMS WebsiteBaker 2.8.x
- * @package     anynews
- * @author      cwsoft (http://cwsoft.de)
- * @version     2.2.0
- * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl-3.0.html
  */
 
-// prevent this file from being accessed directly
-if (defined('WB_PATH') == false) {
-	exit("Cannot access this file directly");
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
 }
+// end include class.secure.php
+
 
 // function to display news items on every page via (invoke function from template or code page)
 if (! function_exists('displayNewsItems')) {
@@ -42,7 +48,8 @@ if (! function_exists('displayNewsItems')) {
 		$lang_filter = false            // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
 	)
 	{
-		global $wb, $database, $LANG;
+		global $oLEPTON, $database;
+		$oAN = anynews::getInstance();
 
 		/**
 		 *	Is the first arg an array() we're using this one!
@@ -88,7 +95,7 @@ if (! function_exists('displayNewsItems')) {
 		 */
 		require_once ('code/anynews_functions.php');
 		require_once ('thirdparty/truncate.php');
-		require_once (WB_PATH . '/include/phplib/template.inc');
+		require_once (LEPTON_PATH . '/include/phplib/template.inc');
 
 		/**
 		 * Sanitize user specified function parameters
@@ -105,11 +112,6 @@ if (! function_exists('displayNewsItems')) {
 		sanitizeUserInputs($group_id_type, 'l{group_id;group_id;page_id;section_id;post_id}');
 		sanitizeUserInputs($lang_filter, 'b');
 
-		/**
-		 * Include Anynews language file depending on defined $lang_id 
-		 */
-		$lang_id = getValidLanguageId($lang_id);
-		loadLanguageFile($lang_id);
 
 		/**
 		 * Create template object and configure it
@@ -147,7 +149,7 @@ if (! function_exists('displayNewsItems')) {
 		$tpl->set_block('page', 'no_news_available_block', 'no_news_available_block_handle');
 
 		// replace placeholders with values from language file
-		foreach ($LANG['ANYNEWS'][0] as $key => $value) {
+		foreach ($oAN->language as $key => $value) {
 			$tpl->set_var($key, $value);
 		}
 
@@ -241,8 +243,8 @@ if (! function_exists('displayNewsItems')) {
 			$news_counter = 1;
 			while ($row = $results->fetchRow()) {
 				// build absolute links from [wblink] tags found in news short or long text database field
-				$wb->preprocess($row['content_short']);
-				$wb->preprocess($row['content_long']);
+				$oLEPTON->preprocess($row['content_short']);
+				$oLEPTON->preprocess($row['content_long']);
 
 			 	// fetch custom placeholders from short/long text fields and replace template placeholders with values
 				$custom_vars_short_text = getCustomOutputVariables($row['content_short'], $custom_placeholder, 'SHORT');
@@ -268,13 +270,13 @@ if (! function_exists('displayNewsItems')) {
 				// work out group image if exists
 				$group_id = $row['group_id'];
 				$image = '';
-				if (file_exists(WB_PATH . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg')) {
-					$image = '<img src="' . WB_URL . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg' . '" alt="" />';
+				if (file_exists(LEPTON_PATH . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg')) {
+					$image = '<img src="' . LEPTON_URL . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg' . '" alt="" />';
 				}
 
 				// replace news article dependend template placeholders
 				$tpl->set_var(array(
-					'WB_URL' => WB_URL, 
+					'LEPTON_PURL' => LEPTON_URL, 
 					'GROUP_IMAGE' => $image, 
 					'NEWS_ID' => $news_counter, 
 					'POST_ID' => (int)$row['post_id'], 
@@ -287,12 +289,12 @@ if (! function_exists('displayNewsItems')) {
 					'DISPLAY_NAME' => array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '', 
 					'TITLE' => ($strip_tags) ? strip_tags($row['title']) : $row['title'], 
 					'COMMENTS' => isset($row['comments']) ? $row['comments'] : 0, 
-					'LINK' => WB_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
+					'LINK' => LEPTON_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION, 
 					'CONTENT_SHORT' => $image . $row['content_short'], 
 					'CONTENT_LONG' => $row['content_long'], 
-					'POSTED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'],$row['posted_when']), 
-					'PUBLISHED_WHEN' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_when']), 
-					'PUBLISHED_UNTIL' => date($LANG['ANYNEWS'][0]['DATE_FORMAT'], $row['published_until'])
+					'POSTED_WHEN' => date($oAN->language['DATE_FORMAT'],$row['posted_when']), 
+					'PUBLISHED_WHEN' => date($oAN->language['DATE_FORMAT'], $row['published_when']), 
+					'PUBLISHED_UNTIL' => date($oAN->language['DATE_FORMAT'], $row['published_until'])
 					)
 				);
 

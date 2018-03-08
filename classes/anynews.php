@@ -1,3 +1,5 @@
+<?php
+
 /**
  * @module          anynews
  * @author          cwsoft, LEPTON project
@@ -7,3 +9,13 @@
  * @license_terms   please see license
  *
  */
+
+class anynews extends LEPTON_abstract {
+
+		static $instance;
+		public function initialize() {
+			
+		}
+	
+	
+}

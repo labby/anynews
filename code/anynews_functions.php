@@ -1,67 +1,35 @@
 <?php
-/**
- * Code snippet: anynews
- *
- * This code snippets grabs news entries from the WebsiteBaker news
- * module and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php
- * file of the template.
- *
- * This file contains the utility functions used by the Anynews snippet.
- * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @platform    CMS WebsiteBaker 2.8.x
- * @package     anynews
- * @author      cwsoft (http://cwsoft.de)
- * @version     2.2.0
- * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl-3.0.html
-*/
-
-// prevent this file from being accessed directly
-if (defined('WB_PATH') == false) {
-	exit("Cannot access this file directly");
-}
 
 /**
- * Function to work out language ID
-*/
-function getValidLanguageId($lang_id)
-{
-	$lang_id = strtoupper($lang_id);
+ * @module          anynews
+ * @author          cwsoft, LEPTON project
+ * @copyright       cwsoft, LEPTON project
+ * @link            http://www.cms-lab.com
+ * @license         http://www.gnu.org/licenses/gpl-3.0.html
+ * @license_terms   please see license
+ *
+ */
 
-	switch($lang_id) {
-		case 'AUTO':
-			// loop over all Anynews language files ($file => DE.php, EN.php ...) and compare language id from URL
-			foreach(glob(dirname(__FILE__) . '/../languages/[A-Z]*.php') as $file) {
-				// check if actual page URL contains a language flag (e.g. /EN/ --> http://yourdomain.com/pages/en/xxx)
-				$lang_flag = '/' . substr(basename($file), 0, -4) . '/';
-				
-				if (strpos(strtoupper($_SERVER['SCRIPT_NAME']), $lang_flag) !== false) {
-					// return language id from the page URL
-					return substr(basename($file), 0, -4);
-				}
-			}
-
-			// no flag found in URL, use WebsiteBaker LANGUAGE constant
-			return strtoupper(substr(LANGUAGE, 0, 2));
-
-		default:
-			return substr($lang_id, 0, 2);
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
 	}
 }
+// end include class.secure.php
 
-/**
- * Function to include the module language file
-*/
-function loadLanguageFile($lang_id)
-{
-	// include Anynews language file if exists, use EN.php as fallback
-	global $LANG;
-	$lang_path = dirname(__FILE__) . '/../languages/';
-	require(file_exists($lang_path . $lang_id . '.php') ? $lang_path . $lang_id . '.php' : $lang_path . 'EN.php');
-}
+
 
 /**
  * Function to sanitize function input parameters

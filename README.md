@@ -1,4 +1,4 @@
-# Anynews Code Snippet for CMS LEPTON (1.x)
+# Anynews Code Snippet for CMS LEPTON 
 The code snippet `Anynews` is designed to fetch news entries from the [LEPTON CMS](http://www.lepton-cms.org) `news` module. Just call the Anynews function ***displayNewsItems();*** where you want the news output to appear on your frontend. Optional function parameters, HTML templates, content placeholders and CSS definitions allows you to style the news output the way you want. Anynews ships with four templates - including two jQuery sliding effects - ready for use out of the box.
 
 Power users define their own placeholders containing information extracted from the short and/or long `news` module description. Mastering Anynews is possible - but requires you to study the information provided in the section ***Customizing Anynews***.
@@ -12,33 +12,19 @@ Anynews is licensed under the [GNU General Public License (GPL) v3.0](http://www
 ## Requirements
 The minimum requirements to get Anynews running on your LEPTON installation are as follows:
 
-- LEPTON ***1.x*** or higher
+- LEPTON ***4.x*** or higher
 - default LEPTON `news` module
-- PHP ***5.3.x*** or higher
 - Optional: small modification of your template file to enable jQuery support
 
 ## Installation
-1. download the [current release](http://www.lepton-cms.org/english/addons/free-addons.php) LEPTON installation package
+1. download the [current release](http://lepton-cms.com) LEPTON installation package
 2. log into your LEPTON backend and go to the `Add-ons/Modules` section
 3. install the downloaded zip archive via the LEPTON installer
 
 ### Enable jQuery support (optional)
-If you want to use JavaScript effects or jQuery plugins with Anynews, you need to add one code line to your frontend template. Open your LEPTON frontend template file ***index.php*** in the [Addon File Editor](http://www.lepton-cms.org/english/addons/free-addons.php) and search for the following lines. 
-
-	if (function_exists('register_frontend_modfiles')) {
-		register_frontend_modfiles('css');
-		register_frontend_modfiles('js');
-	}
-
-Change the code lines above as follows:
-
-	if (function_exists('register_frontend_modfiles')) {
-		register_frontend_modfiles('css');
-		register_frontend_modfiles('jquery');
-		register_frontend_modfiles('js');
-	}
-
-If you can't find the code above in the index.php of your template, simply at the last code block to the end of your &lt;head&gt;&lt;/head&gt; section.	
+If you want to use JavaScript effects or jQuery plugins with Anynews, you need to include jquery into your frontend template.
+Use the jquery from lib_jquery inside the package.
+	
 	
 ## Usage
 As Anynews is designed to fetch news items from the LEPTON `news` module, you need to add some news entries with the `news` module **before** you can use Anynews. If no news are available, Anynews just outputs the message "No news available yet". Follow the steps below to add some news entries with the LEPTON `news` module.
@@ -140,7 +126,7 @@ Calling Anynews in it´s easiest form ***displayNewsItems();*** uses the default 
 ***Tip:*** 
 You can output a list with all *group_ids* and the *group titles* created by the LEPTON `news` module, by adding the following code into a page/section of type `code`.
 
-	require_once(WB_PATH . '/modules/anynews/code/anynews_functions.php');
+	require_once(LEPTON_PATH . '/modules/anynews/code/anynews_functions.php');
 	print_r(getNewsGroupTitles());
 
 Visit the created page/section in your frontend and search for the *group_id(s)* you want to use in the Anynews function call. 

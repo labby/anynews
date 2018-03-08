@@ -35,8 +35,8 @@ $(document).ready(function () {
 
     // apply our left + right buttons
     $scroll
-        .before('<img class="scrollButtons left" src="' + WB_URL + '/modules/anynews/thirdparty/better-coda-slider/images/scroll_left.png" />')
-        .after('<img class="scrollButtons right" src="' + WB_URL + '/modules/anynews/thirdparty/better-coda-slider/images/scroll_right.png" />');
+        .before('<img class="scrollButtons left" src="' + LEPTON_URL + '/modules/anynews/thirdparty/better-coda-slider/images/scroll_left.png" />')
+        .after('<img class="scrollButtons right" src="' + LEPTON_URL + '/modules/anynews/thirdparty/better-coda-slider/images/scroll_right.png" />');
 
 
     // handle nav selection

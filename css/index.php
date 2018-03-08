@@ -1,25 +1,32 @@
 <?php
-/**
- * Code snippet: anynews
- *
- * This code snippets grabs news entries from the WebsiteBaker news
- * module and displays them on any page you want by invoking the function
- * displayNewsItems() via a page of type code or the index.php
- * file of the template.
- *
- * This file prevents directory listing.
- * 
- * LICENSE: GNU General Public License 3.0
- * 
- * @platform    CMS WebsiteBaker 2.8.x
- * @package     anynews
- * @author      cwsoft (http://cwsoft.de)
- * @version     2.1.0
- * @copyright   cwsoft
- * @license     http://www.gnu.org/licenses/gpl-3.0.html
-*/
 
-// prevent this file from being accessed directly
-if (defined('WB_PATH') == false) {
-	exit("Cannot access this file directly");
+/**
+ * @module          anynews
+ * @author          cwsoft, LEPTON project
+ * @copyright       cwsoft, LEPTON project
+ * @link            http://www.cms-lab.com
+ * @license         http://www.gnu.org/licenses/gpl-3.0.html
+ * @license_terms   please see license
+ *
+ */
+
+// include class.secure.php to protect this file and the whole CMS!
+if (defined('LEPTON_PATH')) {	
+	include(LEPTON_PATH.'/framework/class.secure.php'); 
+} else {
+	$oneback = "../";
+	$root = $oneback;
+	$level = 1;
+	while (($level < 10) && (!file_exists($root.'/framework/class.secure.php'))) {
+		$root .= $oneback;
+		$level += 1;
+	}
+	if (file_exists($root.'/framework/class.secure.php')) { 
+		include($root.'/framework/class.secure.php'); 
+	} else {
+		trigger_error(sprintf("[ <b>%s</b> ] Can't include class.secure.php!", $_SERVER['SCRIPT_NAME']), E_USER_ERROR);
+	}
 }
+// end include class.secure.php
+
+?>

@@ -21,7 +21,7 @@
 			<tt>CONTENT_LONG: </tt>{CONTENT_LONG}
 
 			<h3 style="text-decoration:underline;color:green;">Additional placeholder: "News table"</h3>
-			<tt>WB_URL: </tt>{WB_URL}<br />
+			<tt>LEPTON_PURL: </tt>{LEPTON_PURL}<br />
 			<tt>NEWS_ID: </tt>{NEWS_ID}<br />
 			<tt>POST_ID: </tt>{POST_ID}<br />
 			<tt>SECTION_ID: </tt>{SECTION_ID}<br />
