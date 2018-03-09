@@ -67,7 +67,7 @@ if (! function_exists('displayNewsItems')) {
 		 */
 		$all_args = func_get_args();
 		
-		if ( isset($all_args[0]) && is_array($all_args[0]) ) {
+		if ( isset($all_args[0]) && is_array($all_args[0]) && (count($all_args) == 1 )) {
 			// param 1 is pass as an array! We're using this as our config!
 			$defaults = array(
 				'group_id' => 0,
