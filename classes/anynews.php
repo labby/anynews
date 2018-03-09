@@ -16,7 +16,7 @@ class anynews extends LEPTON_abstract
 
     public $currentTemplate = self::DEFAULT_TEMPLATE;
 
-    private $allUsers = array();
+    private $requestedUsers = array();
     
     public $allGroups = array();
     
@@ -24,28 +24,17 @@ class anynews extends LEPTON_abstract
     static $instance;
 	
     public function initialize()
-    {
-        self::$instance->getAllUsers();
-        
+    {   
         self::$instance->allGroups = news::getInstance()->allGroups;
     }
-
-    private function getAllUsers()
-    {
-        $aTemp = array();
-        LEPTON_database::getInstance()->execute_query(
-            "SELECT `user_id`,`username`,`display_name` FROM `".TABLE_PREFIX."users`",
-            true,
-            $aTemp,
-            true
-        );
-        
-        foreach($aTemp as $user)
+    
+    public function getUserInfo( $iUserID = 0 )
+    {        
+        if(!isset($this->requestedUsers[ $iUserID ]))
         {
-            self::$instance->allUsers[ $user['user_id'] ] = array(
-                'username' => $user['username'],
-                'display_name'  => $user['display_name']
-            );
+            $this->requestedUsers[ $iUserID ] = LEPTON_admin::get_user_details( $iUserID );
+       
         }
+        return $this->requestedUsers[ $iUserID ];
     }
 }

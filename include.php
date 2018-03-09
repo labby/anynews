@@ -209,7 +209,7 @@ if (! function_exists('displayNewsItems')) {
 			// $news_group_titles = $oAN->aAllGroups;
 
 			// fetch user names from users database table
-			$user_list = getUserNames();
+			// $user_list = getUserNames();
 
 			// loop through all news articles found
 			$news_counter = 1;
@@ -222,9 +222,11 @@ if (! function_exists('displayNewsItems')) {
 				$custom_vars_short_text = getCustomOutputVariables($row['content_short'], $custom_placeholder, 'SHORT');
 				$custom_vars_long_text = getCustomOutputVariables($row['content_long'], $custom_placeholder, 'LONG');
 				$custom_vars = array_merge($custom_vars_short_text, $custom_vars_long_text);
-
+                
+                //  A! ???
 				// replace custom placeholders in template with values
 				foreach ($custom_vars as $key => $value) {
+					
 					// $tpl->set_var($key, $value);
 				}
 
@@ -243,28 +245,32 @@ if (! function_exists('displayNewsItems')) {
 				$group_id = $row['group_id'];
 				$image = '';
 				if (file_exists(LEPTON_PATH . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg')) {
-					$image = '<img src="' . LEPTON_URL . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg' . '" alt="" />';
+                    $image = '<img src="' . LEPTON_URL . MEDIA_DIRECTORY . '/.news/image' . $group_id . '.jpg' . '" alt="" />';
 				}
 
 				// replace news article dependend template placeholders
 				$row['group_image'] = $image;
-				$row['news_counter'] = $news_counter;
-				
+
 				$row['group_title'] = $oAN->allGroups[ $row['group_id'] ] ?? '';
 				
-				$row['username'] = array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '';
-				$row['display_name'] = array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '';
+				$aUserInfo = $oAN->getUserInfo( $row['posted_by'] );
+				$row['username']        = $aUserInfo['username'];
+				$row['display_name']    = $aUserInfo['display_name'];
+				
 				$row['link'] = LEPTON_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION;
 				$row['posted_when'] =  date($oAN->language['DATE_FORMAT'],$row['posted_when']);
 				$row['published_when'] = date($oAN->language['DATE_FORMAT'], $row['published_when']);
 				$row['published_until'] = date($oAN->language['DATE_FORMAT'], $row['published_until']);	
-				$row['news_items'] = $news_counter - 1;			
 				
+				//  Aldus 2018-03-09: ???
+				$row['news_items'] = $news_counter - 1;			
+				$row['news_counter'] = $news_counter;
 				$news_counter++;
 			}
+			
 			$data = array(
-			'results' => $results,
-			'oAN'	=> $oAN
+                'results' => $results,
+                'oAN'	=> $oAN
 			);
 		
 			echo $oTWIG->render( 
