@@ -14,22 +14,10 @@
 {% autoescape false %}
 <script type="text/javascript">
 
-	var $head = $("html").contents().find("head");
-    $head.append($("<link/>", 
-        {
-            rel: "stylesheet",
-            href: "{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/flexslider.css",
-            type: "text/css"
-        }));
-	
-	$head.append($("<link/>", 
-        {
-            rel: "stylesheet",
-            href: "{{ LEPTON_URL }}/modules/anynews/css/custom-settings-flexslider.css",
-            type: "text/css"
-        }));
-        
-	$.getScript( '{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js');
+    $("head").append($("<link rel='stylesheet' href='{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/flexslider.css' type='text/css' media='screen' />"));
+    $("head").append($("<link rel='stylesheet' href='{{ LEPTON_URL }}/modules/anynews/css/custom-settings-flexslider.css' type='text/css' media='screen' />"));
+
+    $.getScript( '{{ LEPTON_URL }}/modules/anynews/thirdparty/flexslider/jquery.flexslider-min.js');
 	$.getScript( '{{ LEPTON_URL }}/modules/anynews/javascript/custom-settings-flexslider.js');
 
 </script>
