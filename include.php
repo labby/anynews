@@ -29,7 +29,6 @@ if (defined('LEPTON_PATH')) {
 }
 // end include class.secure.php
 
-
 // function to display news items on every page via (invoke function from template or code page)
 if (! function_exists('displayNewsItems')) {
 	function displayNewsItems(
@@ -48,7 +47,8 @@ if (! function_exists('displayNewsItems')) {
 		$lang_filter = false            // flag to enable language filter (default:= false, show only news from a news page, which language fits $lang_id)
 	)
 	{
-		global $oLEPTON, $database;
+		global $oLEPTON;
+		
 		$oAN = anynews::getInstance();
 		$oTWIG = lib_twig_box::getInstance();
 		$oTWIG->registerModule('anynews');
@@ -197,15 +197,16 @@ if (! function_exists('displayNewsItems')) {
 		 * Process database query and output the template files
 		 */
 		$results = array();
-		$database->execute_query($sql,
-		true,
-		$results,
-		true
+		LEPTON_database::getInstance()->execute_query(
+		    $sql,
+            true,
+            $results,
+            true
 		);
 //echo(LEPTON_tools::display($results,'pre','ui message'));
 		if (count($results) > 0) {
 			// fetch news group titles from news database table
-			$news_group_titles = getNewsGroupTitles();
+			// $news_group_titles = $oAN->aAllGroups;
 
 			// fetch user names from users database table
 			$user_list = getUserNames();
@@ -224,7 +225,7 @@ if (! function_exists('displayNewsItems')) {
 
 				// replace custom placeholders in template with values
 				foreach ($custom_vars as $key => $value) {
-					$tpl->set_var($key, $value);
+					// $tpl->set_var($key, $value);
 				}
 
 				// remove tags from short and long text if defined
@@ -248,7 +249,9 @@ if (! function_exists('displayNewsItems')) {
 				// replace news article dependend template placeholders
 				$row['group_image'] = $image;
 				$row['news_counter'] = $news_counter;
-				$row['group_title'] = array_key_exists($row['group_id'], $news_group_titles) ? htmlentities($news_group_titles[$row['group_id']]) : '';
+				
+				$row['group_title'] = $oAN->allGroups[ $row['group_id'] ] ?? '';
+				
 				$row['username'] = array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['USERNAME']) : '';
 				$row['display_name'] = array_key_exists($row['posted_by'], $user_list) ? htmlentities($user_list[$row['posted_by']]['DISPLAY_NAME']) : '';
 				$row['link'] = LEPTON_URL . PAGES_DIRECTORY . $row['link'] . PAGE_EXTENSION;
