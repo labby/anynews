@@ -205,11 +205,6 @@ if (! function_exists('displayNewsItems')) {
 		);
 //echo(LEPTON_tools::display($results,'pre','ui message'));
 		if (count($results) > 0) {
-			// fetch news group titles from news database table
-			// $news_group_titles = $oAN->aAllGroups;
-
-			// fetch user names from users database table
-			// $user_list = getUserNames();
 
 			// loop through all news articles found
 			$news_counter = 1;
@@ -253,6 +248,7 @@ if (! function_exists('displayNewsItems')) {
 
 				$row['group_title'] = $oAN->allGroups[ $row['group_id'] ] ?? '';
 				
+				// get user name and display_name by the id
 				$aUserInfo = $oAN->getUserInfo( $row['posted_by'] );
 				$row['username']        = $aUserInfo['username'];
 				$row['display_name']    = $aUserInfo['display_name'];
